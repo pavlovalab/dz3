@@ -13,7 +13,7 @@ public class Test {
         WebElement adressEmail = driver.findElement(By.id("email"));
         adressEmail.sendKeys("webinar.test@gmail.com");
 
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
 
         WebElement password = driver.findElement(By.id("passwd"));
         password.sendKeys("Xcg7299bnSmMuRLp9ITw");
