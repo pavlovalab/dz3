@@ -2,6 +2,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Test {
     public static void main(String[] args) throws InterruptedException {
@@ -13,7 +17,7 @@ public class Test {
         WebElement adressEmail = driver.findElement(By.id("email"));
         adressEmail.sendKeys("webinar.test@gmail.com");
 
-//        Thread.sleep(1000);
+        Thread.sleep(1000);
 
         WebElement password = driver.findElement(By.id("passwd"));
         password.sendKeys("Xcg7299bnSmMuRLp9ITw");
@@ -23,9 +27,39 @@ public class Test {
         WebElement button = driver.findElement(By.name("submitLogin"));
         button.click();
 
-        Thread.sleep(3000);
+//       WebElement catalog = driver.findElement(By.cssSelector("#subtab-AdminCatalog span"));
+        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#subtab-AdminCategories[data-submenu='11']")));
+        WebElement catalog = driver.findElement(By.cssSelector("#subtab-AdminCatalog[data-submenu='9']"));
 
-        WebElement pictureUser = driver.findElement(By.cssSelector("#header_employee_box span"));
+        Actions builder = new Actions(driver);
+        builder.moveToElement(catalog).perform();
+
+//        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#subtab-AdminCategories[data-submenu='11']")));
+        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#subtab-AdminCategories[data-submenu='11']")));
+       WebElement category = driver.findElement(By.cssSelector("#subtab-AdminCategories[data-submenu='11']"));
+ //       Thread.sleep(1000);
+ //       builder.sendKeys("");
+ //       category.click();
+        builder.moveToElement(category).click().perform();
+
+        Thread.sleep(2000);
+        driver.quit();
+
+     /*   catalog.click();
+        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.cssSel
+
+                Thread.sleep(3000);
+        razdel = driver.findElement(By.tagName("h2")).getText();
+        System.out.println(razdel);
+        driver.navigate().refresh();
+
+        if (driver.findElement(By.tagName("h2")).getText().equals(razdel)==false){
+            System.out.println("Ошибка.Произошел переход в другой раздел!");
+        }else {
+            System.out.println("Пользователь остается в том же разделе!");
+        }
+
+        /*WebElement pictureUser = driver.findElement(By.cssSelector("#header_employee_box span"));
         pictureUser.click();
 
         Thread.sleep(1000);
@@ -217,7 +251,7 @@ public class Test {
             System.out.println("Ошибка.Произошел переход в другой раздел!");
         }else {
             System.out.println("Пользователь остается в том же разделе!");
-        }
+        }*/
     }
     public static WebDriver getInitFirefoxDriver(){
         System.setProperty("webdriver.gecko.driver",Test.class.getResource ("geckodriver.exe").getPath());
