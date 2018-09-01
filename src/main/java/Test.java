@@ -27,22 +27,38 @@ public class Test {
         WebElement button = driver.findElement(By.name("submitLogin"));
         button.click();
 
-//       WebElement catalog = driver.findElement(By.cssSelector("#subtab-AdminCatalog span"));
         new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#subtab-AdminCategories[data-submenu='11']")));
         WebElement catalog = driver.findElement(By.cssSelector("#subtab-AdminCatalog[data-submenu='9']"));
-
         Actions builder = new Actions(driver);
         builder.moveToElement(catalog).perform();
 
-//        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#subtab-AdminCategories[data-submenu='11']")));
         new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#subtab-AdminCategories[data-submenu='11']")));
-       WebElement category = driver.findElement(By.cssSelector("#subtab-AdminCategories[data-submenu='11']"));
- //       Thread.sleep(1000);
- //       builder.sendKeys("");
- //       category.click();
+        WebElement category = driver.findElement(By.cssSelector("#subtab-AdminCategories[data-submenu='11']"));
         builder.moveToElement(category).click().perform();
 
-        Thread.sleep(2000);
+        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#page-header-desc-category-new_category[title='Добавить категорию']")));
+        WebElement add_category = driver.findElement(By.cssSelector("#page-header-desc-category-new_category[title='Добавить категорию']"));
+        add_category.click();
+
+        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.id("name_1")));
+        WebElement name_category = driver.findElement(By.id("name_1"));
+        name_category.sendKeys("Fruits");
+
+        Thread.sleep(1000);
+
+        WebElement button_save = driver.findElement(By.id("category_form_submit_btn"));
+        button_save.click();
+        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#content>.bootstrap>.alert")));
+
+        WebElement success = driver.findElement(By.cssSelector("#content>.bootstrap>.alert"));
+        String alert = success.getAttribute("class");
+        if(alert.equals("alert alert-success")){
+            System.out.println("Категория успешно создана");
+        }else{
+            System.out.println("Ошибка создания категории");
+        }
+
+        Thread.sleep(5000);
         driver.quit();
 
      /*   catalog.click();
