@@ -41,11 +41,11 @@ public class MainClass {
         do {
             builder.moveToElement(catalog).perform();
             try {
-                // Ожидание появление подменю
+                // Ожидание появления подменю
                 new WebDriverWait(driver, 1).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#subtab-AdminCategories[data-submenu='11']")));
                 break;
             } catch (Exception e) {
-                eventListener.debug("Ожидание появление подменю!");
+                eventListener.debug("Ожидание появления подменю!");
             }
             builder.moveToElement(orders).perform();
         } while (1 == 1);
@@ -99,7 +99,7 @@ public class MainClass {
         driver.unregister(eventListener);
     }
 
-    public static WebDriver getInitFirefoxDriver() {
+    private static WebDriver getInitFirefoxDriver() {
         System.setProperty("webdriver.gecko.driver", MainClass.class.getResource("geckodriver.exe").getPath());
         return new FirefoxDriver();
     }

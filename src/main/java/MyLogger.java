@@ -59,7 +59,7 @@ public class MyLogger implements WebDriverEventListener {
     }
 
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-        System.out.println("Поиск элемента по " + by + "");
+        System.out.println("Поиск элемента по " + by);
     }
 
     public void afterFindBy(By by, WebElement element, WebDriver driver) {
